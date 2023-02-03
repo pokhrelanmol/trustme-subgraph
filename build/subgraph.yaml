@@ -1,0 +1,37 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: TrustMe
+    network: goerli
+    source:
+      address: "0x1Edd72D1D17A62a1B0C447BE96672b35c1231d76"
+      abi: TrustMe
+      startBlock: 8420263
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TradeCanceled
+        - TradeConfirmed
+        - TradeCreated
+        - TradeExpired
+        - TradeWithdrawn
+      abis:
+        - name: TrustMe
+          file: TrustMe/abis/TrustMe.json
+      eventHandlers:
+        - event: TradeCanceled(indexed uint256,indexed address,indexed address)
+          handler: handleTradeCanceled
+        - event: TradeConfirmed(indexed uint256,indexed address,indexed address)
+          handler: handleTradeConfirmed
+        - event: TradeCreated(indexed uint256,indexed address,indexed
+            address,address,address,uint256,uint256,uint256)
+          handler: handleTradeCreated
+        - event: TradeExpired(indexed uint256,indexed address,indexed address)
+          handler: handleTradeExpired
+        - event: TradeWithdrawn(indexed uint256,indexed address,indexed address)
+          handler: handleTradeWithdrawn
+      file: TrustMe/TrustMe.wasm

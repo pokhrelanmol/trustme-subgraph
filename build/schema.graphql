@@ -1,0 +1,61 @@
+enum TradeStatus {
+    Pending
+    Confirmed
+    Canceled
+    Expired
+    Withdrawn
+}
+
+type AllTrade @entity {
+    id: ID!
+    tradeID: BigInt! # uint256
+    seller: Bytes! # address
+    buyer: Bytes! # address
+    tokenToSell: Bytes! # address
+    tokenToBuy: Bytes! # address
+    tokenAmtToSell: BigInt! # uint256
+    tokenAmtToBuy: BigInt! # uint256
+    deadline: BigInt! # uint256
+    status: TradeStatus!
+}
+
+type TradeCanceled @entity(immutable: true) {
+    id: ID!
+    tradeID: BigInt! # uint256
+    seller: Bytes! # address
+    buyer: Bytes! # address
+}
+
+type TradeConfirmed @entity(immutable: true) {
+    id: ID!
+    tradeID: BigInt! # uint256
+    seller: Bytes! # address
+    buyer: Bytes! # address
+}
+
+type TradeCreated @entity(immutable: true) {
+    id: ID!
+    tradeID: BigInt! # uint256
+    seller: Bytes! # address
+    buyer: Bytes! # address
+    tokenToSell: Bytes! # address
+    tokenToBuy: Bytes! # address
+    tokenAmtToSell: BigInt! # uint256
+    tokenAmtToBuy: BigInt! # uint256
+    deadline: BigInt! # uint256
+}
+
+type TradeExpired @entity(immutable: true) {
+    id: ID!
+    tradeID: BigInt! # uint256
+    seller: Bytes! # address
+    buyer: Bytes! # address
+}
+
+type TradeWithdrawn @entity(immutable: true) {
+    id: ID!
+    tradeID: BigInt! # uint256
+    seller: Bytes! # address
+    buyer: Bytes! # address
+    status: TradeStatus!
+}
